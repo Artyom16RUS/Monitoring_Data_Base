@@ -1,4 +1,4 @@
-import javax.naming.NamingException;
+
 import java.sql.*;
 
 public class SQLRequest {
@@ -6,14 +6,12 @@ public class SQLRequest {
     private Statement statement;
     private PreparedStatement preparedStatement;
     private String sqlCommand;
-    private ServiceTrigger serviceTrigger;
 
     public SQLRequest()  {
+
         try {
             connection = DriverManager.getConnection("jdbc:sqlite:db.sqlite");
             statement = connection.createStatement();
-            serviceTrigger = new ServiceTrigger(connection, statement, preparedStatement);
-
             statement.execute("CREATE TABLE IF NOT EXISTS users(\n" +
                     "                      id INTEGER PRIMARY KEY,\n" +
                     "                      name TEXT NOT NULL,\n" +
@@ -28,13 +26,10 @@ public class SQLRequest {
                     "                          date TEXT NOT NULL,\n" +
                     "                          operation TEXT NOT NULL\n" +
                     ")");
-            connection.close();
+            ServiceTrigger serviceTrigger = new ServiceTrigger();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
-
     }
 
     public int insert(String name, int age, String address) {
@@ -46,7 +41,6 @@ public class SQLRequest {
             preparedStatement.setInt(2, age);
             preparedStatement.setString(3, address);
             rows = preparedStatement.executeUpdate();
-            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -64,7 +58,6 @@ public class SQLRequest {
             preparedStatement.setString(3, address);
             preparedStatement.setInt(4, id);
             rows = preparedStatement.executeUpdate();
-            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -78,16 +71,10 @@ public class SQLRequest {
             preparedStatement = connection.prepareStatement(sqlCommand);
             preparedStatement.setInt(1, id);
             rows = preparedStatement.executeUpdate();
-            connection.close();
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return rows;
-    }
-
-    public void listChanged(){
-
     }
 
 

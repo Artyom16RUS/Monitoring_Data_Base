@@ -11,7 +11,7 @@ public class JdbcTemplate {
     public static <T> List<T> executeQuery(Connection connection, String sql, RowMapper<T> mapper) throws SQLException {
         try (
                 Statement statement = connection.createStatement();
-                ResultSet resultSet = statement.executeQuery(sql);
+                ResultSet resultSet = statement.executeQuery(sql)
         ) {
             List<T> result = new LinkedList<>();
             while (resultSet.next()) { // переходит на следующую позицию и возвращает true, если там есть данные
