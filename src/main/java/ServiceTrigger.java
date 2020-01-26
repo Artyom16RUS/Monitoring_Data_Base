@@ -41,7 +41,7 @@ public class ServiceTrigger{
         try {
             list = JdbcTemplate.executeQuery(
                     connection,
-                    "SELECT new_name, new_age, new_address, date FROM user_log WHERE DATE(" + date + ")",
+                    "SELECT new_name, new_age, new_address, date FROM user_log WHERE date LIKE '" + date + "%'",
                     resultSet -> new User(
                             resultSet.getString("new_name"),
                             resultSet.getInt("new_age"),
