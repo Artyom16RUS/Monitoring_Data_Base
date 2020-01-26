@@ -7,11 +7,6 @@ CREATE TABLE IF NOT EXISTS users(
                       address TEXT NOT NULL
 );
 
---SQL command
-INSERT INTO users (name, age, address) VALUES ('Ola', 18, 'www');
-UPDATE users SET name = 'null', age = 0, address = '0000' WHERE id = 1;
-DELETE FROM users WHERE id = 3;
-
 --Create table USER_LOG
 DROP TABLE IF EXISTS user_log;
 CREATE TABLE IF NOT EXISTS user_log (
