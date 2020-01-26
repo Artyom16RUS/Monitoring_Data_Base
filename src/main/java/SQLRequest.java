@@ -8,75 +8,87 @@ public class SQLRequest {
     private String sqlCommand;
     private ServiceTrigger serviceTrigger;
 
-    public SQLRequest() throws SQLException {
-        connection = DriverManager.getConnection("jdbc:sqlite:db.sqlite");
-        statement = connection.createStatement();
-        serviceTrigger = new ServiceTrigger(connection, statement);
+    public SQLRequest()  {
+        try {
+            connection = DriverManager.getConnection("jdbc:sqlite:db.sqlite");
+            statement = connection.createStatement();
+            serviceTrigger = new ServiceTrigger(connection, statement, preparedStatement);
 
-        statement.execute("CREATE TABLE IF NOT EXISTS users(\n" +
-                "                      id INTEGER PRIMARY KEY,\n" +
-                "                      name TEXT NOT NULL,\n" +
-                "                      age INTEGER NOT NULL,\n" +
-                "                      address TEXT NOT NULL\n" +
-                ")");
-        statement.execute("CREATE TABLE IF NOT EXISTS user_log (\n" +
-                "                          new_id INTEGER,\n" +
-                "                          new_name TEXT NOT NULL,\n" +
-                "                          new_age INTEGER NOT NULL,\n" +
-                "                          new_address TEXT NOT NULL,\n" +
-                "                          date TEXT NOT NULL,\n" +
-                "                          operation TEXT NOT NULL\n" +
-                ")");
+            statement.execute("CREATE TABLE IF NOT EXISTS users(\n" +
+                    "                      id INTEGER PRIMARY KEY,\n" +
+                    "                      name TEXT NOT NULL,\n" +
+                    "                      age INTEGER NOT NULL,\n" +
+                    "                      address TEXT NOT NULL\n" +
+                    ")");
+            statement.execute("CREATE TABLE IF NOT EXISTS user_log (\n" +
+                    "                          new_id INTEGER,\n" +
+                    "                          new_name TEXT NOT NULL,\n" +
+                    "                          new_age INTEGER NOT NULL,\n" +
+                    "                          new_address TEXT NOT NULL,\n" +
+                    "                          date TEXT NOT NULL,\n" +
+                    "                          operation TEXT NOT NULL\n" +
+                    ")");
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
 
     }
 
-//    public List<Auto> getAll() throws SQLException {
-//        try (var conn = ds.getConnection()) {
-//            try (var stmt = conn.createStatement()) {
-//                try (var rs = stmt.executeQuery("SELECT id, name, description, image FROM autos")) {
-//                    var list = new ArrayList<Auto>();
-//
-//                    while (rs.next()) {
-//                        list.add(new Auto(
-//                                rs.getString("id"),
-//                                rs.getString("name"),
-//                                rs.getString("description"),
-//                                rs.getString("image")
-//                        ));
-//                    }
-//                    return list;
-//                }
-//            }
-//        }
-//    }
-
-    public int insert(String name, int age, String address) throws SQLException {
+    public int insert(String name, int age, String address) {
         sqlCommand = "INSERT INTO users (name, age, address) VALUES (?, ?, ?)";
-        preparedStatement = connection.prepareStatement(sqlCommand);
-        preparedStatement.setString(1, name);
-        preparedStatement.setInt(2, age);
-        preparedStatement.setString(3, address);
-        int rows = preparedStatement.executeUpdate();
+        int rows = 0;
+        try {
+            preparedStatement = connection.prepareStatement(sqlCommand);
+            preparedStatement.setString(1, name);
+            preparedStatement.setInt(2, age);
+            preparedStatement.setString(3, address);
+            rows = preparedStatement.executeUpdate();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return rows;
 
     }
 
-    public int update(int id, String name, int age, String address) throws SQLException {
+    public int update(int id, String name, int age, String address){
         sqlCommand = "UPDATE users SET name = ?, age = ?, address = ? WHERE id = ?";
-        preparedStatement = connection.prepareStatement(sqlCommand);
-        preparedStatement.setString(1, name);
-        preparedStatement.setInt(2, age);
-        preparedStatement.setString(3, address);
-        preparedStatement.setInt(4, id);
-        int rows = preparedStatement.executeUpdate();
+        int rows = 0;
+        try {
+            preparedStatement = connection.prepareStatement(sqlCommand);
+            preparedStatement.setString(1, name);
+            preparedStatement.setInt(2, age);
+            preparedStatement.setString(3, address);
+            preparedStatement.setInt(4, id);
+            rows = preparedStatement.executeUpdate();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return rows;
     }
 
-    public int delete(int id) throws SQLException {
+    public int delete(int id) {
         sqlCommand = "DELETE FROM users WHERE id = ?";
-        preparedStatement = connection.prepareStatement(sqlCommand);
-        preparedStatement.setInt(1, id);
-        int rows = preparedStatement.executeUpdate();
+        int rows = 0;
+        try {
+            preparedStatement = connection.prepareStatement(sqlCommand);
+            preparedStatement.setInt(1, id);
+            rows = preparedStatement.executeUpdate();
+            connection.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return rows;
     }
+
+    public void listChanged(){
+
+    }
+
+
 }
