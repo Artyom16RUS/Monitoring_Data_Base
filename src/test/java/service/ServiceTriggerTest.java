@@ -22,7 +22,7 @@ class ServiceTriggerTest {
         int countThree = request.delete(1);
         assertEquals(1,countThree);
 
-        int sizeArray = trigger.getDataChanges("2020-01-27").size();
+        int sizeArray = trigger.getDataChanges("2020-01-27 00:00:00").size();
         assertEquals(3, sizeArray);
 
         request.close();

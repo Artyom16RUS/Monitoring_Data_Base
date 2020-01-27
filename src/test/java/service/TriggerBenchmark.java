@@ -18,7 +18,7 @@ public class TriggerBenchmark extends AbstractBenchmark {
             request.insert("Abcdefghijklmnopqrstuvwxyz", count, "Abcdefghijklmnopqrstuvwxyz");
         }
 
-        trigger.getDataChanges("2020-01-27");
+        trigger.getDataChanges("2020-01-27 00:00:00");
         request.close();
     }
 }
