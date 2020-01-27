@@ -1,4 +1,4 @@
-
+[![Build Status](https://travis-ci.org/Artyom16RUS/Monitoring_Data_Base.svg?branch=master)](https://travis-ci.org/Artyom16RUS/Monitoring_Data_Base)  [![codecov](https://codecov.io/gh/Artyom16RUS/Monitoring_Data_Base/branch/master/graph/badge.svg)](https://codecov.io/gh/Artyom16RUS/Monitoring_Data_Base)
 
 
 ### _Monitoring Data Base_
