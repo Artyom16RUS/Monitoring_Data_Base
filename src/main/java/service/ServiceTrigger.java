@@ -11,6 +11,9 @@ public class ServiceTrigger{
     private Connection connection;
     private Statement statement;
 
+    /**
+     * Constructor - creates a trigger in a database based on an existing table.
+     */
     public ServiceTrigger(){
         try {
             connection = DriverManager.getConnection("jdbc:sqlite:db.sqlite");
@@ -43,6 +46,12 @@ public class ServiceTrigger{
         }
     }
 
+    /**
+     * List of changes.
+     *
+     * @param time - time for the period of which there were changes.
+     * @return - list of changes for the specified time.
+     */
     public List<User> getDataChanges(String time){
         List<User> list = null;
         try {

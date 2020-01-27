@@ -8,6 +8,9 @@ public class SQLRequest {
     private PreparedStatement preparedStatement;
     private String sqlCommand;
 
+    /**
+     * Constructor - creates a user database (for example).
+     */
     public SQLRequest()  {
 
         try {
