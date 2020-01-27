@@ -19,5 +19,6 @@ public class TriggerBenchmark extends AbstractBenchmark {
         }
         trigger.getDataChanges("2020-01-27");
 
+        request.close();
     }
 }

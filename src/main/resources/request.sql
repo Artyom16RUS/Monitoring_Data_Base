@@ -1,21 +1,21 @@
 --Create table USERS
 DROP TABLE IF EXISTS users;
 CREATE TABLE IF NOT EXISTS users(
-                      id INTEGER PRIMARY KEY,
-                      name TEXT NOT NULL,
-                      age INTEGER NOT NULL,
-                      address TEXT NOT NULL
+                                    id INTEGER PRIMARY KEY,
+                                    name TEXT NOT NULL,
+                                    age INTEGER NOT NULL,
+                                    address TEXT NOT NULL
 );
 
 --Create table USER_LOG
 DROP TABLE IF EXISTS user_log;
 CREATE TABLE IF NOT EXISTS user_log (
-                          new_id INTEGER,
-                          new_name TEXT NOT NULL,
-                          new_age INTEGER NOT NULL,
-                          new_address TEXT NOT NULL,
-                          date TEXT NOT NULL,
-                          operation TEXT NOT NULL
+                                        new_id INTEGER,
+                                        new_name TEXT NOT NULL,
+                                        new_age INTEGER NOT NULL,
+                                        new_address TEXT NOT NULL,
+                                        date TEXT NOT NULL,
+                                        operation TEXT NOT NULL
 );
 
 --TRIGGER INSERT
@@ -46,4 +46,8 @@ END;
 --VIEW
 SELECT * FROM users;
 SELECT * FROM user_log;
+
+--VIEW DATE
+SELECT new_name, new_age, new_address, date FROM user_log WHERE date Like '2020-01-26 19:20:38%';
+
 
