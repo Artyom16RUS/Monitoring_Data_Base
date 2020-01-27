@@ -12,7 +12,7 @@ public class TriggerBenchmark extends AbstractBenchmark {
     public void getDataChanges() {
         SQLRequest request = new SQLRequest();
         ServiceTrigger trigger = new ServiceTrigger();
-        int count = 1_000;
+        int count = 100;
 
         for (int i = 0; i < count; i++) {
             request.insert("Abcdefghijklmnopqrstuvwxyz", count, "Abcdefghijklmnopqrstuvwxyz");
