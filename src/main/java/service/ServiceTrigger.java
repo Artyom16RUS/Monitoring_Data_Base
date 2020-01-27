@@ -13,6 +13,9 @@ public class ServiceTrigger{
 
     /**
      * Constructor - creates a trigger in a database based on an existing table.
+     *
+     *  @version 1.0
+     *  @autor Shaykhutdinov Artyom
      */
     public ServiceTrigger(){
         try {
