@@ -1,3 +1,5 @@
+package service;
+
 import java.sql.*;
 
 public class SQLRequest {
@@ -11,21 +13,12 @@ public class SQLRequest {
         try {
             connection = DriverManager.getConnection("jdbc:sqlite:db.sqlite");
             statement = connection.createStatement();
-            statement.execute("CREATE TABLE IF NOT EXISTS users(\n" +
-                    "                      id INTEGER PRIMARY KEY,\n" +
-                    "                      name TEXT NOT NULL,\n" +
-                    "                      age INTEGER NOT NULL,\n" +
-                    "                      address TEXT NOT NULL\n" +
+            statement.execute("CREATE TABLE IF NOT EXISTS users(" +
+                    "                      id INTEGER PRIMARY KEY," +
+                    "                      name TEXT NOT NULL," +
+                    "                      age INTEGER NOT NULL," +
+                    "                      address TEXT NOT NULL" +
                     ")");
-            statement.execute("CREATE TABLE IF NOT EXISTS user_log (\n" +
-                    "                          new_id INTEGER,\n" +
-                    "                          new_name TEXT NOT NULL,\n" +
-                    "                          new_age INTEGER NOT NULL,\n" +
-                    "                          new_address TEXT NOT NULL,\n" +
-                    "                          date TEXT NOT NULL,\n" +
-                    "                          operation TEXT NOT NULL\n" +
-                    ")");
-            ServiceTrigger serviceTrigger = new ServiceTrigger();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -76,5 +69,13 @@ public class SQLRequest {
         return rows;
     }
 
-
+    public void close(){
+        try {
+            preparedStatement.close();
+            statement.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
