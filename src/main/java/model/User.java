@@ -12,4 +12,20 @@ public class User {
         this.address = address;
         this.date = date;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getDate() {
+        return date;
+    }
 }
